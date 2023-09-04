@@ -452,8 +452,8 @@ MonoBehaviour:
   currentLevel: 0
   currentState: 0
   unlockedCustomers:
-  - {fileID: 11400000, guid: c91623860cd9678449290aa9f1c3892c, type: 2}
   - {fileID: 11400000, guid: e0879ac52c948be44bdf4bea52136411, type: 2}
+  - {fileID: 11400000, guid: c91623860cd9678449290aa9f1c3892c, type: 2}
   customerManager: {fileID: 1432287943}
   microGameHolderManager: {fileID: 638086270}
 --- !u!4 &543789276
