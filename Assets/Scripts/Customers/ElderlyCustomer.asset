@@ -16,6 +16,6 @@ MonoBehaviour:
   gameType: Gun Type
   sprites:
   - {fileID: 21300000, guid: 9fcaf3464de3d024ca719dd0c65c2381, type: 3}
-  microGameScenePaths:
-  - DemoPath3
-  - DemoPath4
+  microGames:
+  - MicrogameName: Mash It
+    microgamePrefab: {fileID: 1245198278498499275, guid: 9ad98154063bf374c97186c260e724e4, type: 3}

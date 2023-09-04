@@ -34,9 +34,9 @@ public class CustomerManager : MonoBehaviour
         customerImage.sprite = null;
     }
 
-    public string GetMiniGame()
+    public Microgame GetMiniGame()
     {
-        int minigameIndex = Random.Range(0, currentCustomer.microGameScenePaths.Count);
-        return currentCustomer.microGameScenePaths[minigameIndex];
+        int minigameIndex = Random.Range(0, currentCustomer.microGames.Count);
+        return currentCustomer.microGames[minigameIndex];
     }
 }
