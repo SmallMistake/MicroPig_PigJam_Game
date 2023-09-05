@@ -18,4 +18,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 795efefc0e0de314d80082186484f4ab, type: 3}
   microGames:
   - MicrogameName: Eat It
-    microgamePrefab: {fileID: 1245198278498499275, guid: 9ad98154063bf374c97186c260e724e4, type: 3}
+    microgamePrefab: {fileID: 580734035806624825, guid: 089bfec19cbb54846ab641c041baf32c, type: 3}

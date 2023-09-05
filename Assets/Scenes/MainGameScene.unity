@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe69a335e277b7645aa8e112c1c00fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeholderMicroGame: {fileID: 3035008683124149491, guid: 9199e0f6e6e8c47409443588fafd57a8, type: 3}
+  microgameHUD: {fileID: 6459597713712188545, guid: 1445a1bc767b83c42be157d91ac03094, type: 3}
 --- !u!4 &638086271
 Transform:
   m_ObjectHideFlags: 0

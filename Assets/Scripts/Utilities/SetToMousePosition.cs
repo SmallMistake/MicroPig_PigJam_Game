@@ -9,24 +9,27 @@ public class SetToMousePosition : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        Cursor.visible = false;
+        if(hideDefaultCursor)
+        {
+            Cursor.visible = false;
+        }
     }
 
     void OnApplicationFocus(bool hasFocus)
     {
-        if (hasFocus)
+        if (hasFocus && hideDefaultCursor)
         {
+
             Cursor.visible = false;
-        }
-        else
-        {
-            //Cursor.visible = false;
         }
     }
 
     private void OnDisable()
     {
-        Cursor.visible = true;
+        if (hideDefaultCursor)
+        {
+            Cursor.visible = true;
+        }
     }
 
     // Update is called once per frame

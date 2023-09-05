@@ -5,33 +5,26 @@ using UnityEngine.Events;
 
 public class MicrogameTimer : MonoBehaviour
 {
-    public float timeInSeconds;
+    public float timeOutInSeconds;
     public UnityEvent onTimerEnded;
 
-    private Coroutine timerCoroutine;
+    private float currentTime;
+
+    public delegate void CurrentTimeOutPercent(float currentPercent);
+    public static CurrentTimeOutPercent currentTimeOutPercent;
 
     private void OnEnable()
     {
-        if(timerCoroutine != null)
-        {
-            StopCoroutine(timerCoroutine);
-            timerCoroutine = null;
-        }
-        timerCoroutine = StartCoroutine(HandleTimer());
+        currentTime = 0;
     }
 
-    private void OnDisable()
+    private void FixedUpdate()
     {
-        if (timerCoroutine != null)
+        currentTime += Time.deltaTime;
+        currentTimeOutPercent?.Invoke(currentTime/timeOutInSeconds);
+        if (currentTime >= timeOutInSeconds)
         {
-            StopCoroutine(timerCoroutine);
-            timerCoroutine = null;
+            onTimerEnded?.Invoke();
         }
-    }
-
-    IEnumerator HandleTimer()
-    {
-        yield return new WaitForSeconds(timeInSeconds);
-        onTimerEnded?.Invoke();
     }
 }

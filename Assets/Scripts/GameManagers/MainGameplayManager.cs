@@ -11,6 +11,16 @@ public class MainGameplayManager : MonoBehaviour
     public CustomerManager customerManager;
     public MicroGameHolderManager microGameHolderManager;
 
+    private void OnEnable()
+    {
+        MicrogameManager.onMicrogameFinished += OnMicroGameFinish;
+    }
+
+    private void OnDisable()
+    {
+        MicrogameManager.onMicrogameFinished -= OnMicroGameFinish;
+    }
+
 
     public void HandleResults()
     {
@@ -33,8 +43,15 @@ public class MainGameplayManager : MonoBehaviour
     public void SetupMicrogamePhase()
     {
         Microgame microgame = customerManager.GetMiniGame();
-        microGameHolderManager.LoadMicroGame(microgame);
+        MicrogameManager microgameManager = microGameHolderManager.LoadMicroGame(microgame);
         microGameHolderManager.TransitionToMicroGame();
+    }
+
+    private void OnMicroGameFinish(bool won)
+    {
+        print("Game Won: " + won.ToString());
+        microGameHolderManager.HandleMicroGameEnd();
+        SetCurrentState(GameplayStates.LevelAnouncementScreen);
     }
 
 

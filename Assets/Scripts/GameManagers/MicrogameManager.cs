@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MicrogameManager : MonoBehaviour
 {
-    public float microGameLengthInSeconds;
     public List<MicrogameGoalTracker> microgameGoals;
+
+    public delegate void OnMicrogameFinished(bool won);
+    public static OnMicrogameFinished onMicrogameFinished;
+
+    private bool gameOver = false;
 
     private void OnEnable()
     {
@@ -13,13 +18,6 @@ public class MicrogameManager : MonoBehaviour
         {
             microgameGoal.onGoalStatusChanged.AddListener(GoalStatusChanged);
         }
-        /*
-        if(microgameCountDown != null)
-        {
-            StopCoroutine(microgameCountDown);
-            microgameCountDown = null;
-        }
-        */
     }
 
     public void GoalStatusChanged(bool statusChanged)
@@ -27,6 +25,7 @@ public class MicrogameManager : MonoBehaviour
         if (IsMicrogameWon())
         {
             print("Microgame Won");
+            FinishMicrogame(true);
         }
     }
 
@@ -46,6 +45,15 @@ public class MicrogameManager : MonoBehaviour
 
     public void TimeOut()
     {
-        print("Time Out");
+        if(!IsMicrogameWon())
+        {
+            print("Time Out");
+            FinishMicrogame(false);
+        }
+    }
+
+    private void FinishMicrogame(bool won)
+    {
+        onMicrogameFinished?.Invoke(won);
     }
 }
