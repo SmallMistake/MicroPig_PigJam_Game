@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd1c7ca3217d8b4286093ef4222ce74, type: 3}
+  m_Name: Developer
+  m_EditorClassIdentifier: 
+  customerName: 
+  gameType: 
+  sprites: []
+  microGames:
+  - MicrogameName: 
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: Code It
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: Ding It
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: 
+    microgamePrefab: {fileID: 0}

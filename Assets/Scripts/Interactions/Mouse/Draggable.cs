@@ -12,11 +12,12 @@ public class Draggable : MonoBehaviour
     private bool dragging = false;
     private List<GameObject> possibleDropLocations = new List<GameObject>();
 
-
+    private float trueGravityScale;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        trueGravityScale = rb.gravityScale;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,6 +58,9 @@ public class Draggable : MonoBehaviour
         if(possibleDropLocations.Count > 0)
         {
             possibleDropLocations[0].GetComponent<DropHolder>().SlotItem(gameObject);
+        } else
+        {
+            rb.gravityScale = trueGravityScale;
         }
     }
     private void FixedUpdate()
