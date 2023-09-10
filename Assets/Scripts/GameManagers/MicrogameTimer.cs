@@ -10,21 +10,32 @@ public class MicrogameTimer : MonoBehaviour
 
     private float currentTime;
 
+    private bool paused = false;
+
     public delegate void CurrentTimeOutPercent(float currentPercent);
     public static CurrentTimeOutPercent currentTimeOutPercent;
 
     private void OnEnable()
     {
         currentTime = 0;
+        MicrogameManager.onMicrogameFinished += HandleFinish;
     }
 
     private void FixedUpdate()
     {
-        currentTime += Time.deltaTime;
-        currentTimeOutPercent?.Invoke(currentTime/timeOutInSeconds);
-        if (currentTime >= timeOutInSeconds)
+        if (!paused)
         {
-            onTimerEnded?.Invoke();
+            currentTime += Time.deltaTime;
+            currentTimeOutPercent?.Invoke(currentTime / timeOutInSeconds);
+            if (currentTime >= timeOutInSeconds)
+            {
+                onTimerEnded?.Invoke();
+            }
         }
+    }
+
+    private void HandleFinish(bool won)
+    {
+        paused = true;
     }
 }

@@ -6,20 +6,28 @@ using UnityEngine.Events;
 
 public class MicrogameManager : MonoBehaviour
 {
+    private float announcementLength = 2; //TODO use for Microgame Start
+
     public List<MicrogameGoalTracker> microgameGoals;
 
     public delegate void OnMicrogameFinished(bool won);
     public static OnMicrogameFinished onMicrogameFinished;
 
+    public delegate void OnMicrogameAnnounce(string microgameName, float duration);
+    public static OnMicrogameAnnounce onMicrogameAnnounce;
+
     private bool gameOver = false;
 
-    private void OnEnable()
+    private void Start()
     {
+
         if(microgameGoals.Count == 0)
         {
             microgameGoals = FindObjectsOfType<MicrogameGoalTracker>().ToList();
         }
-        foreach(MicrogameGoalTracker microgameGoal in microgameGoals)
+        onMicrogameAnnounce?.Invoke("Test Game!!!", announcementLength);
+
+        foreach (MicrogameGoalTracker microgameGoal in microgameGoals)
         {
             microgameGoal.onGoalStatusChanged.AddListener(GoalStatusChanged);
         }
