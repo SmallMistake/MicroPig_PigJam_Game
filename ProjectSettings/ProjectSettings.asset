@@ -632,7 +632,9 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED
+    Android: TMP_PRESENT
+    Standalone: MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED;TMP_PRESENT
+    WebGL: TMP_PRESENT
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

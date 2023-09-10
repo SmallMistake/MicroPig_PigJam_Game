@@ -7,9 +7,12 @@ public class MainGameplayManager : MonoBehaviour
 {
     public int currentLevel;
     public GameplayStates currentState;
-    public List<Customer> unlockedCustomers;
-    public CustomerManager customerManager;
+    public List<Customer> customers;
+    
+    //public CustomerManager customerManager;
     public MicroGameHolderManager microGameHolderManager;
+
+
 
     private void OnEnable()
     {
@@ -22,29 +25,29 @@ public class MainGameplayManager : MonoBehaviour
     }
 
 
-    public void HandleResults()
-    {
-        currentLevel++;
-        SetupNextCustomer();
-    }
+    //public void HandleResults()
+    //{
+    //    currentLevel++;
+    //    SetupNextCustomer();
+    //}
 
 
-    public void SetupNextCustomer()
-    {
-        customerManager.SetCustomer(ChooseCustomer());
-    }
+    //public void SetupNextCustomer()
+    //{
+    //    customerManager.SetCustomer(ChooseCustomer());
+    //}
 
     private Customer ChooseCustomer()
     {
-        int selectedCustomerIndex = Random.Range(0, unlockedCustomers.Count);
-        return unlockedCustomers[selectedCustomerIndex];
+        int selectedCustomerIndex = Random.Range(0, customers.Count);
+        return customers[selectedCustomerIndex];
     }
 
     public void SetupMicrogamePhase()
     {
-        Microgame microgame = customerManager.GetMiniGame();
-        MicrogameManager microgameManager = microGameHolderManager.LoadMicroGame(microgame);
-        microGameHolderManager.TransitionToMicroGame();
+        //Microgame microgame = customerManager.GetMiniGame();
+        //MicrogameManager microgameManager = microGameHolderManager.LoadMicroGame(microgame);
+        //microGameHolderManager.TransitionToMicroGame();
     }
 
     private void OnMicroGameFinish(bool won)

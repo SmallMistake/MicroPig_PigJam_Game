@@ -7,6 +7,7 @@ public class MicroGameHolderManager : MonoBehaviour
     public GameObject microgameHUD;
 
     private GameObject microGameInstance;
+
     public MicrogameManager LoadMicroGame(Microgame microgame)
     {
         microGameInstance = Instantiate(microgame.microgamePrefab);

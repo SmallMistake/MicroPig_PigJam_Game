@@ -10,7 +10,9 @@ public class MicrogameManager : MonoBehaviour
     public delegate void OnMicrogameFinished(bool won);
     public static OnMicrogameFinished onMicrogameFinished;
 
+
     private bool gameOver = false;
+
 
     private void OnEnable()
     {
@@ -19,6 +21,7 @@ public class MicrogameManager : MonoBehaviour
             microgameGoal.onGoalStatusChanged.AddListener(GoalStatusChanged);
         }
     }
+
 
     public void GoalStatusChanged(bool statusChanged)
     {
