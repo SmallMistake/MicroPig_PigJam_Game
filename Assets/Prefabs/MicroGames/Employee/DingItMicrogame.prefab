@@ -287,7 +287,6 @@ GameObject:
   - component: {fileID: 9060503593992827457}
   - component: {fileID: 9060503593992827470}
   - component: {fileID: 9060503593992827456}
-  - component: {fileID: 9060503593992827459}
   - component: {fileID: 9060503593992827458}
   m_Layer: 9
   m_Name: Bell
@@ -416,18 +415,6 @@ MonoBehaviour:
           m_StringArgument: asdasdfwfg
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &9060503593992827459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9060503593992827468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47f24777f6ad2624ba0b3484f40c069b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &9060503593992827458
 Rigidbody2D:
   serializedVersion: 4
