@@ -33,6 +33,7 @@ public class MicrogameManager : MonoBehaviour
         }
     }
 
+
     public void GoalStatusChanged(bool statusChanged)
     {
         if (!gameOver && IsMicrogameWon())
