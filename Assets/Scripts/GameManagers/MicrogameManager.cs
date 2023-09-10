@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,10 @@ public class MicrogameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        if(microgameGoals.Count == 0)
+        {
+            microgameGoals = FindObjectsOfType<MicrogameGoalTracker>().ToList();
+        }
         foreach(MicrogameGoalTracker microgameGoal in microgameGoals)
         {
             microgameGoal.onGoalStatusChanged.AddListener(GoalStatusChanged);
@@ -22,7 +27,7 @@ public class MicrogameManager : MonoBehaviour
 
     public void GoalStatusChanged(bool statusChanged)
     {
-        if (IsMicrogameWon())
+        if (!gameOver && IsMicrogameWon())
         {
             print("Microgame Won");
             FinishMicrogame(true);

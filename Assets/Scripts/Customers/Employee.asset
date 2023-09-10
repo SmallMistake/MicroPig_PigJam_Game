@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cd1c7ca3217d8b4286093ef4222ce74, type: 3}
-  m_Name: ElderlyCustomer
+  m_Name: Employee
   m_EditorClassIdentifier: 
-  customerName: Granny
-  gameType: Gun Type
-  sprites:
-  - {fileID: 21300000, guid: 9fcaf3464de3d024ca719dd0c65c2381, type: 3}
+  customerName: Employee
+  gameType: 
+  sprites: []
   microGames:
-  - MicrogameName: Mash It
-    microgamePrefab: {fileID: 1245198278498499275, guid: 9ad98154063bf374c97186c260e724e4, type: 3}
+  - MicrogameName: 
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: Change It
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: Fix It
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: Power It
+    microgamePrefab: {fileID: 0}

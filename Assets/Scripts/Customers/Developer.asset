@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cd1c7ca3217d8b4286093ef4222ce74, type: 3}
-  m_Name: NormalCustomers
+  m_Name: Developer
   m_EditorClassIdentifier: 
-  customerName: Normal Customer
-  gameType: Normal Type
-  sprites:
-  - {fileID: 21300000, guid: 795efefc0e0de314d80082186484f4ab, type: 3}
+  customerName: 
+  gameType: 
+  sprites: []
   microGames:
-  - MicrogameName: Eat It
-    microgamePrefab: {fileID: 580734035806624825, guid: 089bfec19cbb54846ab641c041baf32c, type: 3}
+  - MicrogameName: 
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: Code It
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: Ding It
+    microgamePrefab: {fileID: 0}
+  - MicrogameName: 
+    microgamePrefab: {fileID: 0}
