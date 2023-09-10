@@ -45,7 +45,7 @@ public class MicrogameManager : MonoBehaviour
 
     public void TimeOut()
     {
-        if(!IsMicrogameWon())
+        if(!IsMicrogameWon() && !gameOver)
         {
             print("Time Out");
             FinishMicrogame(false);
@@ -54,6 +54,7 @@ public class MicrogameManager : MonoBehaviour
 
     private void FinishMicrogame(bool won)
     {
+        gameOver = true;
         onMicrogameFinished?.Invoke(won);
     }
 }
