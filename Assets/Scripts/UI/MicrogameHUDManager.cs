@@ -1,3 +1,5 @@
+using DG.Tweening.Core.Easing;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -12,20 +14,34 @@ public class MicrogameHUDManager : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private void OnEnable()
+    private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        MicrogameManager.onMicrogameAnnounce += AnnounceGame;
         MicrogameManager.onMicrogameFinished += HandleFinish;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
+        MicrogameManager.onMicrogameAnnounce -= AnnounceGame;
         MicrogameManager.onMicrogameFinished -= HandleFinish;
     }
 
-    public void AnnounceGame(string gameName)
+    private void OnEnable()
     {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public void AnnounceGame(string gameName, float announceTime)
+    {
+        announcementText.text =  $"<bounce a=0.2>{gameName}</bounce>";
         announcementText.gameObject.SetActive(true);
+        StartCoroutine(HandleAnnounceFinishCoundown(announceTime));
+    }
+
+    IEnumerator HandleAnnounceFinishCoundown(float countdown)
+    {
+        yield return new WaitForSeconds(countdown);
+        announcementText.gameObject.SetActive(false);
     }
 
     private void HandleFinish(bool won)

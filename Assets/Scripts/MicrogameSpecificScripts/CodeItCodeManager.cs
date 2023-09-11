@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,17 +9,18 @@ using UnityEngine.UI;
 
 public class CodeItCodeManager : MicrogameGoalTracker
 {
-    [TextAreaAttribute]
-    public List<string> codeBlocks;
+    [TextArea]
+    public string[] codeBlocks;
 
     public TextMeshProUGUI codeArea;
-    public ScrollRect scrollArea;
+    public Scrollbar scrollbar;
 
     private StringReader selectedCodeReader;
     void Start()
     {
         string selectedCodeString = SelectCodeBlock();
         selectedCodeReader = new StringReader(selectedCodeString);
+        codeArea.text = "";
 
     }
 
@@ -29,7 +31,7 @@ public class CodeItCodeManager : MicrogameGoalTracker
 
     private string SelectCodeBlock()
     {
-        return codeBlocks[Random.Range(0, codeBlocks.Count)];
+        return codeBlocks[Random.Range(0, codeBlocks.Length)];
     }
     public void ShowNextCodeBlock()
     {
@@ -38,10 +40,15 @@ public class CodeItCodeManager : MicrogameGoalTracker
         {
             codeArea.text += firstLine;
             codeArea.text += "\n";
-            ///scrollArea.val
+            if(firstLine == "")
+            {
+                ShowNextCodeBlock();
+            }
+            //scrollbar.value = 0;
         }
         else
         {
+            goalComplete = true;
             onGoalStatusChanged?.Invoke(true);
         }
     }
