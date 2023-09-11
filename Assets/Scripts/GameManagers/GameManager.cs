@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int _lossCountForGameOver = 4;
 
+    public bool RemoveCompletedGames = false;
+
     private int _losses = 0;
     public static int Losses => instance._losses;
     public static bool GameLost => instance._losses >= instance._lossCountForGameOver;
@@ -62,12 +64,16 @@ public class GameManager : MonoBehaviour
 
     private float totalTime = 0f;
     private TimeControl time = new TimeControl();
-    public static float DeltaTime => instance.time.DeltaTime;
-    public static float DifficultyTimeScale => instance.time.DifficultyScale;
+    public static float DeltaTime => Exists ? instance.time.DeltaTime : Time.deltaTime;
+    public static float FixedDeltaTime => Exists ? instance.time.FixedDeltatime : Time.fixedDeltaTime;
+    public static float DifficultyTimeScale => Exists? instance.time.DifficultyScale : 1f;
     public static float TimeScale
     {
-        get => instance.time.Scale;
-        set => instance.time.SetScale(value);
+        get => Exists ? instance.time.Scale : Time.timeScale;
+        set
+        {
+            if (Exists) instance.time.SetScale(value);
+        }
     }
 
     public float StorefrontDuration = 3f;
@@ -105,6 +111,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<GameState, Action> beginStateActions = new Dictionary<GameState, Action>();
     private Dictionary<GameState, Action<GameState>> endStateActions = new Dictionary<GameState, Action<GameState>>();
     private Action currentUpdateAction;
+
+    public static bool Exists => instance != null;
 
     private void Awake()
     {
@@ -206,13 +214,16 @@ public class GameManager : MonoBehaviour
         {
             this._completedGames++;
             this.time.SetCounter(this._completedGames);
-            this._customer.microGames.Remove(this.currentMicrogame);
-            if (this._customer.microGames.Count == 0)
+            if (this.RemoveCompletedGames)
             {
-                this.customers.Remove(this._customer);
-                if (this.customers.Count == 0)
+                this._customer.microGames.Remove(this.currentMicrogame);
+                if (this._customer.microGames.Count == 0)
                 {
-                    this.GoToState(GameState.EndGame);
+                    this.customers.Remove(this._customer);
+                    if (this.customers.Count == 0)
+                    {
+                        this.GoToState(GameState.EndGame);
+                    }
                 }
             }
         }
@@ -272,6 +283,10 @@ public class GameManager : MonoBehaviour
         this.currentUpdateAction?.Invoke();
     }
 
+    private void FixedUpdate()
+    {
+        this.time.FixedUpdate(Time.fixedDeltaTime);
+    }
     /// <summary>
     /// When we start a new state we clear the timer
     /// and set up any other initial values

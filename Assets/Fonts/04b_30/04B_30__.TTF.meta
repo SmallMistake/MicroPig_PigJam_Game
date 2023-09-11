@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 64e369dbeb357f64f8e4792b16451a86
+guid: 102ce51cbc5d76f41b573955c880a0a6
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -10,8 +10,7 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - 04b
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: e84c2277d97870a47bba155ba33f7a86, type: 3}
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
