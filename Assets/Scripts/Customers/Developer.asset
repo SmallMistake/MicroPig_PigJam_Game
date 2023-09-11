@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd1c7ca3217d8b4286093ef4222ce74, type: 3}
   m_Name: Developer
   m_EditorClassIdentifier: 
-  customerName: 
+  customerName: Developer
   gameType: 
-  sprites: []
+  sprites:
+  - {fileID: 21300000, guid: 42fd0bc8cfe397f43b33b4f54a73e474, type: 3}
   microGames:
   - MicrogameName: Code It
     microgamePrefab: {fileID: 806231726377878578, guid: fba4cbd2fb886eb469036360ac6e5287, type: 3}

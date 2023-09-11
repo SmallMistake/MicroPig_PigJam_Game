@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerName: Employee
   gameType: 
-  sprites: []
+  sprites:
+  - {fileID: 21300000, guid: c8f0029d0bb7c2b459cf5a20b34e5711, type: 3}
   microGames:
   - MicrogameName: Ding It
     microgamePrefab: {fileID: 8571338566015912201, guid: b884081ad787a7d45a17c80b0255c330, type: 3}

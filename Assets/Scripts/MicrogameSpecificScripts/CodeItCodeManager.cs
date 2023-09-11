@@ -44,7 +44,6 @@ public class CodeItCodeManager : MicrogameGoalTracker
             {
                 ShowNextCodeBlock();
             }
-            //scrollbar.value = 0;
         }
         else
         {
