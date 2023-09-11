@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: baf9447ccf8f90641854ae3af8f1d5dd
+guid: 772ad5c4012ef4044a8ac5edf75cf3b2
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Fipps
+  - Bubble3D
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

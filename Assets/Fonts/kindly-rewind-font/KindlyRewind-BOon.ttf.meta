@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: baf9447ccf8f90641854ae3af8f1d5dd
+guid: 879516c539c58044b84343984628c3b6
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Fipps
+  - Kindly Rewind
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
