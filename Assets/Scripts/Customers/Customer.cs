@@ -10,4 +10,5 @@ public class Customer : ScriptableObject
     public string gameType;
     public List<Sprite> sprites;
     public List<Microgame> microGames;
+  
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 using DG.Tweening;
 
@@ -26,6 +27,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private Image endGameBackdrop;
+
+    public TextMeshProUGUI levels;
 
     public void OnGameInitialize(GameManager manager)
     {
@@ -68,7 +71,7 @@ public class UIManager : MonoBehaviour
                 this.endGameLayer.SetActive(false);
                 break;
             case GameState.EndGame:
-                this.endGameBackdrop.color = GameManager.GameLost ? Color.red : Color.green;
+                levels.text = GameManager.CompletedGames.ToString();
                 this.endGameLayer.SetActive(true);
                 this.storefrontLayer.SetActive(false);
                 this.microgameLayer.SetActive(false);
@@ -87,6 +90,7 @@ public class UIManager : MonoBehaviour
 
     private void PlayInShutter()
     {
+        Debug.Log("play in shutter");
         this.shutterScreen.DOKill();
         this.shutterScreen.DOLocalMoveY(0f, 1.5f);
     }

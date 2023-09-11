@@ -265,6 +265,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GoToState(GameState state)
     {
+        Debug.Log("Go to state " + state);
         if (state != this._state)
         {
             this.endStateActions[this._state](state);

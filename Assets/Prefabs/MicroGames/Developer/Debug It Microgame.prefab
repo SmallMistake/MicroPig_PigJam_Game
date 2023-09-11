@@ -222,8 +222,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 250980576290452332}
   m_HandleRect: {fileID: 250980576290452333}
   m_Direction: 2
-  m_Value: 0.5
-  m_Size: 0.24776381
+  m_Value: 0.50000006
+  m_Size: 0.24776386
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.007
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 10
   m_Viewport: {fileID: 250980576312543213}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 250980576226736818}
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 79.86, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
