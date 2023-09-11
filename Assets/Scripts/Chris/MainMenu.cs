@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -60,7 +61,8 @@ public class MainMenu : MonoBehaviour
         door3.SetActive(false);
         doorOpen.SetActive(true);
         blipSound.Play();
-
+        yield return new WaitForSeconds(0.4f);
+        SceneManager.LoadScene("MainGameScene");
     }
 
 

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HealthBarManager : MonoBehaviour
 {
-    private void OnEnable()
+    private void Awake()
     {
         GameManager.OnHealthChanged += UpdateHealthBar;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         GameManager.OnHealthChanged -= UpdateHealthBar;
     }

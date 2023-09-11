@@ -33,6 +33,8 @@ public class MicrogameHUDManager : MonoBehaviour
 
     public void AnnounceGame(string gameName, float announceTime)
     {
+        burnOutText.gameObject.SetActive(false);
+        wellDoneText.gameObject.SetActive(false);
         announcementText.text =  $"<bounce a=0.2>{gameName}</bounce>";
         announcementText.gameObject.SetActive(true);
         StartCoroutine(HandleAnnounceFinishCoundown(announceTime));

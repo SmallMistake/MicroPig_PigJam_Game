@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        this.GoToState(GameState.MainMenu);
+        this.GoToState(GameState.Storefront);
     }
 
     private void OnUIStartGameEvent(object sender, EventArgs args)
@@ -230,9 +230,9 @@ public class GameManager : MonoBehaviour
         else 
         {
             this._losses++;
+            OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
             if (this._losses >= this._lossCountForGameOver)
             {
-                OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
                 this.GoToState(GameState.EndGame);
             }
         }
