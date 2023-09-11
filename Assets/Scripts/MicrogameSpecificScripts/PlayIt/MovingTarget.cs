@@ -73,6 +73,14 @@ public class MovingTarget : MicrogameGoalTracker
         this.screenGoal = Camera.main.ViewportToScreenPoint(this.viewportGoal);
 
         this.goal = Camera.main.ScreenToWorldPoint(screenGoal) + (Vector3.forward * 10f);
+        if (this.goal.x > this.transform.position.x)
+        {
+            this.transform.localEulerAngles = Vector3.up * 180f;
+        }
+        else
+        {
+            this.transform.localEulerAngles = Vector3.zero;
+        }
        
     }
 
