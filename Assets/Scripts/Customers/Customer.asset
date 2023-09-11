@@ -16,4 +16,10 @@ MonoBehaviour:
   gameType: 
   sprites:
   - {fileID: 21300000, guid: 579fc7316ee79374589409b068d591fa, type: 3}
-  microGames: []
+  microGames:
+  - MicrogameName: Shoot It
+    microgamePrefab: {fileID: 1237107994699556933, guid: b37308b328d0d66448a4329bbd0b8479, type: 3}
+  - MicrogameName: Change It
+    microgamePrefab: {fileID: 2698258472364260304, guid: d473ba3c004e4944da7e79195320a1fc, type: 3}
+  - MicrogameName: Swipe It
+    microgamePrefab: {fileID: 3393621571722651080, guid: 25325899124e8bf4c879bcbf01649d60, type: 3}

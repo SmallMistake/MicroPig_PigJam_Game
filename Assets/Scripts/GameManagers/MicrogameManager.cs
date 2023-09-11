@@ -6,7 +6,9 @@ using UnityEngine.Events;
 
 public class MicrogameManager : MonoBehaviour
 {
-    private float announcementLength = 2; //TODO use for Microgame Start
+    private float announcementLength = 1; //TODO use for Microgame Start
+
+    private string microgameName = "Game!!!";
 
     public List<MicrogameGoalTracker> microgameGoals;
 
@@ -18,6 +20,11 @@ public class MicrogameManager : MonoBehaviour
 
     private bool gameOver = false;
 
+    public void SetMicroGameName(string microgameName)
+    {
+        this.microgameName = microgameName;
+    }
+
     private void Start()
     {
 
@@ -25,7 +32,7 @@ public class MicrogameManager : MonoBehaviour
         {
             microgameGoals = FindObjectsOfType<MicrogameGoalTracker>().ToList();
         }
-        onMicrogameAnnounce?.Invoke("Test Game!!!", announcementLength);
+        onMicrogameAnnounce?.Invoke(microgameName, announcementLength);
 
         foreach (MicrogameGoalTracker microgameGoal in microgameGoals)
         {

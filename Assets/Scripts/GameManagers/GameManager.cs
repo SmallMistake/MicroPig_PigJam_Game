@@ -327,6 +327,11 @@ public class GameManager : MonoBehaviour
     private void BeginMicrogameState() 
     {
         this.activeMicrogameInstance = Instantiate(this.currentMicrogame.microgamePrefab);
+        MicrogameManager microgameManager = this.activeMicrogameInstance.GetComponentInChildren<MicrogameManager>();
+        if(microgameManager != null )
+        {
+            microgameManager.SetMicroGameName(this.currentMicrogame.MicrogameName);
+        }
     }
 
     private void BeginEndGameState() { }
