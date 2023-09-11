@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd1c7ca3217d8b4286093ef4222ce74, type: 3}
+  m_Name: Employee
+  m_EditorClassIdentifier: 
+  customerName: Employee
+  gameType: 
+  sprites: []
+  microGames:
+  - MicrogameName: Ding It
+    microgamePrefab: {fileID: 8571338566015912201, guid: b884081ad787a7d45a17c80b0255c330, type: 3}
+  - MicrogameName: Power It
+    microgamePrefab: {fileID: 7685435154778085295, guid: 0b21b30a5d66a794bae76568aa144fa2, type: 3}

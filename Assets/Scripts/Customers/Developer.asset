@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd1c7ca3217d8b4286093ef4222ce74, type: 3}
+  m_Name: Developer
+  m_EditorClassIdentifier: 
+  customerName: 
+  gameType: 
+  sprites: []
+  microGames:
+  - MicrogameName: Code It
+    microgamePrefab: {fileID: 806231726377878578, guid: fba4cbd2fb886eb469036360ac6e5287, type: 3}
+  - MicrogameName: Debug It
+    microgamePrefab: {fileID: 2833678544372844321, guid: 5f511bb557360394aaddf8e1890db867, type: 3}
+  - MicrogameName: Save It
+    microgamePrefab: {fileID: 5601649154668166002, guid: ffa03b4f096cf4e46822643306789ccd, type: 3}
