@@ -11,6 +11,7 @@ public class TimeControl
 {
     public float DifficultyScale { get; private set; }
     public float DeltaTime { get; private set; }
+    public float FixedDeltatime { get; private set; }
 
     public float Scale { get; private set; }
 
@@ -33,5 +34,10 @@ public class TimeControl
     public void Update(float totalTime, float deltaTime)
     {
         this.DeltaTime = deltaTime;
+    }
+
+    public void FixedUpdate(float fixedDeltatime)
+    {
+        this.FixedDeltatime = fixedDeltatime;
     }
 }
