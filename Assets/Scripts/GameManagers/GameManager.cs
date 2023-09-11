@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
     public static int Losses => instance._losses;
     public static bool GameLost => instance._losses >= instance._lossCountForGameOver;
 
+    public delegate void onHealthChanged(int currentHealthPoints);
+    public static onHealthChanged OnHealthChanged;
+
+
     private float totalTime = 0f;
     private TimeControl time = new TimeControl();
     public static float DeltaTime => Exists ? instance.time.DeltaTime : Time.deltaTime;
@@ -196,7 +200,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        this.GoToState(GameState.MainMenu);
+        this.GoToState(GameState.Storefront);
     }
 
     private void OnUIStartGameEvent(object sender, EventArgs args)
@@ -226,6 +230,7 @@ public class GameManager : MonoBehaviour
         else 
         {
             this._losses++;
+            OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
             if (this._losses >= this._lossCountForGameOver)
             {
                 this.GoToState(GameState.EndGame);
