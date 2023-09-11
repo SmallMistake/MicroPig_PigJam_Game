@@ -18,7 +18,5 @@ MonoBehaviour:
   microGames:
   - MicrogameName: Swipe It
     microgamePrefab: {fileID: 0}
-  - MicrogameName: Eat It
-    microgamePrefab: {fileID: 0}
   - MicrogameName: Play It
     microgamePrefab: {fileID: 0}

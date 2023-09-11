@@ -16,11 +16,9 @@ MonoBehaviour:
   gameType: 
   sprites: []
   microGames:
-  - MicrogameName: 
-    microgamePrefab: {fileID: 0}
   - MicrogameName: Code It
-    microgamePrefab: {fileID: 0}
-  - MicrogameName: Ding It
-    microgamePrefab: {fileID: 0}
-  - MicrogameName: 
-    microgamePrefab: {fileID: 0}
+    microgamePrefab: {fileID: 806231726377878578, guid: fba4cbd2fb886eb469036360ac6e5287, type: 3}
+  - MicrogameName: Debug It
+    microgamePrefab: {fileID: 2833678544372844321, guid: 5f511bb557360394aaddf8e1890db867, type: 3}
+  - MicrogameName: Save It
+    microgamePrefab: {fileID: 5601649154668166002, guid: ffa03b4f096cf4e46822643306789ccd, type: 3}
