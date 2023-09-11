@@ -2,6 +2,7 @@ using PixelCrushers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour
@@ -13,6 +14,8 @@ public class Draggable : MonoBehaviour
     private List<GameObject> possibleDropLocations = new List<GameObject>();
 
     private float trueGravityScale;
+
+    public UnityEvent onDragStart;
 
     private void Awake()
     {
@@ -50,6 +53,7 @@ public class Draggable : MonoBehaviour
     {
         dragging = true;
         transform.SetParent(null);
+        onDragStart?.Invoke();
     }
 
     public void EndDrag()

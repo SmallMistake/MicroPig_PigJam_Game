@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
     public delegate void onHealthChanged(int currentHealthPoints);
     public static onHealthChanged OnHealthChanged;
 
+    public delegate void onLevelSuccess(int currentLevelsFinished);
+    public static onLevelSuccess OnLevelSuccess;
+
 
     private float totalTime = 0f;
     private TimeControl time = new TimeControl();
@@ -213,6 +216,7 @@ public class GameManager : MonoBehaviour
         if (success)
         {
             this._completedGames++;
+            OnLevelSuccess?.Invoke(this._completedGames);
             this.time.SetCounter(this._completedGames);
             if (this.RemoveCompletedGames)
             {
