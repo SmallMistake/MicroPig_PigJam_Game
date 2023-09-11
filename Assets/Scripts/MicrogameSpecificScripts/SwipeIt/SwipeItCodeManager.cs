@@ -26,7 +26,8 @@ public class SwipeItCodeManager : MicrogameGoalTracker
     private GameObject
         redLightContent,
         greenLightContent,
-        warningContent;
+        warningContent,
+        grabbedFry;
 
     public Vector2 RedLightDurationRange;
     public Vector2 GreenLightDurationRange;
@@ -43,6 +44,7 @@ public class SwipeItCodeManager : MicrogameGoalTracker
     public float WarningDuration = 0.2f;
     private float progress;
     private bool failed = false;
+    private bool gameover => goalComplete || failed;
     private Dictionary<State, State> stateTransition = new Dictionary<State, State>()
     {
         { State.GreenLight, State.Warning },
@@ -56,7 +58,8 @@ public class SwipeItCodeManager : MicrogameGoalTracker
     }
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+       
+        if (!gameover && Input.GetMouseButton(0))
         {
             if (this.isRedLight)
             {
@@ -67,6 +70,7 @@ public class SwipeItCodeManager : MicrogameGoalTracker
             if (this.progress >= 1f && !this.failed)
             {
                 this.goalComplete = true;
+                this.grabbedFry.SetActive(true);
                 this.onGoalStatusChanged?.Invoke(true);
             }
         }
