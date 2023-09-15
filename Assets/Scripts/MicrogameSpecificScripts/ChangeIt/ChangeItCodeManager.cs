@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class ChangeItCodeManager : MicrogameGoalTracker
 {
@@ -12,6 +13,8 @@ public class ChangeItCodeManager : MicrogameGoalTracker
     private int startIndex;
 
     public GameObject ThumbsUp;
+
+    public TextMeshPro channelTextMesh;
 
     private GameObject activeChannelObject;
 
@@ -26,6 +29,7 @@ public class ChangeItCodeManager : MicrogameGoalTracker
 
     private void Awake()
     {
+        channelTextMesh.text = "";
         this.DesiredChannel = Random.Range(0, channels.Count);
         this.startIndex = (this.DesiredChannel + Random.Range(1, channels.Count - 1)) % this.channels.Count;
         if (this.startIndex < 0) this.startIndex += this.channels.Count;
@@ -54,6 +58,7 @@ public class ChangeItCodeManager : MicrogameGoalTracker
     {
         this.CurrentChannel = (this.CurrentChannel + adjustment) % this.channels.Count;
         if (this.CurrentChannel < 0) this.CurrentChannel += this.channels.Count;
+        channelTextMesh.text = (CurrentChannel + 1).ToString();
         if (this.channelChangeRoutine == null)
         {
             this.channelChangeRoutine = this.ChannelChangeProcess();
@@ -83,10 +88,10 @@ public class ChangeItCodeManager : MicrogameGoalTracker
     public void TimeOut()
     {
         this.gameover = true;
+        this.onGoalStatusChanged?.Invoke(true);
         if (this.CurrentChannel == this.DesiredChannel)
         {
             this.goalComplete = true;
-            this.onGoalStatusChanged?.Invoke(true);
         }
         else
         {

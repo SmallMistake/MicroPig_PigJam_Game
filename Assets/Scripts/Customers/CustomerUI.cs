@@ -10,7 +10,7 @@ public class CustomerUI : MonoBehaviour
     private Image image;
 
     [SerializeField]
-    private TextMeshProUGUI nameLabel, typeLabel;
+    private TextMeshProUGUI nameLabel;
 
     [SerializeField]
     private CanvasGroup canvasGroup;
@@ -28,7 +28,6 @@ public class CustomerUI : MonoBehaviour
             this.canvasGroup.DOFade(1f, 0.3f);
             this.image.sprite = customer.sprites[Random.Range(0, customer.sprites.Count)];
             this.nameLabel.text = customer.customerName;
-            this.typeLabel.text = customer.gameType;
             this.transform.DOKill();
             this.transform.localScale = Vector3.one * 0.75f;
             this.transform.DOScale(1f,2f);
@@ -40,7 +39,6 @@ public class CustomerUI : MonoBehaviour
             this.canvasGroup.alpha = 0f;
             this.transform.DOKill();
             this.nameLabel.text = "";
-            this.typeLabel.text = "";
         }
     }
 

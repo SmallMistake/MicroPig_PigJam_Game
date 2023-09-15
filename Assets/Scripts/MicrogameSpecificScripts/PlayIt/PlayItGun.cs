@@ -9,6 +9,9 @@ public class PlayItGun : MonoBehaviour
 
     [SerializeField]
     private GameObject bulletPrefab;
+
+    [SerializeField]
+    FMODUnity.StudioEventEmitter gunshotAudioEmitter;
     
     private float cooldown = 0.3f;
     private float cooldownRemaining = 0f;
@@ -28,6 +31,7 @@ public class PlayItGun : MonoBehaviour
     {
         var bullet = Instantiate(this.bulletPrefab, this.muzzle.position, this.transform.rotation);
         this.cooldownRemaining = this.cooldown;
+        gunshotAudioEmitter.Play();
         bullet.SetActive(true);
      
         

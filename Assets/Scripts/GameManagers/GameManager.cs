@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
-
+using UnityEditor.Rendering;
 
 public enum GameState
 {
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
     private Customer _customer;
     public static Customer Customer => instance._customer;
 
-    private Microgame currentMicrogame;
+    private Microgame _currentMicrogame;
     private GameObject activeMicrogameInstance;
     private Dictionary<GameState, GameState> transitions = new Dictionary<GameState, GameState>()
     {
@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
             this.time.SetCounter(this._completedGames);
             if (this.RemoveCompletedGames)
             {
-                this._customer.microGames.Remove(this.currentMicrogame);
+                this._customer.microGames.Remove(_currentMicrogame);
                 if (this._customer.microGames.Count == 0)
                 {
                     this.customers.Remove(this._customer);
@@ -233,8 +233,7 @@ public class GameManager : MonoBehaviour
         }
         else 
         {
-            this._losses++;
-            OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
+            IncreaseLosses(1);
             if (this._losses >= this._lossCountForGameOver)
             {
                 this.GoToState(GameState.EndGame);
@@ -246,6 +245,12 @@ public class GameManager : MonoBehaviour
             this.GoToState(GameState.TransitionToStore);
         }
 
+    }
+
+    internal void IncreaseLosses(int amountToChange)
+    {
+        this._losses += amountToChange;
+        OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
     }
 
     /// <summary>
@@ -318,7 +323,7 @@ public class GameManager : MonoBehaviour
     private void BeginStorefrontState() 
     {
         this._customer = this.customers.ChooseRandom();
-        this.currentMicrogame = this._customer.microGames.ChooseRandom();
+        this._currentMicrogame = this._customer.microGames.ChooseRandom();
         Destroy(this.activeMicrogameInstance);
 
     }
@@ -331,11 +336,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void BeginMicrogameState() 
     {
-        this.activeMicrogameInstance = Instantiate(this.currentMicrogame.microgamePrefab);
+        this.activeMicrogameInstance = Instantiate(this._currentMicrogame.microgamePrefab);
         MicrogameManager microgameManager = this.activeMicrogameInstance.GetComponentInChildren<MicrogameManager>();
         if(microgameManager != null )
         {
-            microgameManager.SetMicroGameName(this.currentMicrogame.MicrogameName);
+            microgameManager.SetMicroGameName(_currentMicrogame.MicrogameName);
         }
     }
 
@@ -389,6 +394,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    public Microgame GetCurrentMicrogame()
+    {
+        return this._currentMicrogame;
+    }
   
 
 }

@@ -18,23 +18,15 @@ public class MainMenu : MonoBehaviour
     GameObject doorOpen;
 
     [SerializeField]
-    AudioSource blipSound;
+    FMODUnity.EventReference blipReference;
 
     [SerializeField]
     Animator anim;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        anim.SetTrigger("MenuStarted");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void StartOpenDoor()
     {
@@ -52,15 +44,15 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         doorClosed.SetActive(false);
         door2.SetActive(true);
-        blipSound.Play();
+        FMODUnity.RuntimeManager.PlayOneShot(blipReference);
         yield return new WaitForSeconds(1f);
         door2.SetActive(false);
         door3.SetActive(true);
-        blipSound.Play();
+        FMODUnity.RuntimeManager.PlayOneShot(blipReference);
         yield return new WaitForSeconds(1f);
         door3.SetActive(false);
         doorOpen.SetActive(true);
-        blipSound.Play();
+        FMODUnity.RuntimeManager.PlayOneShot(blipReference);
         yield return new WaitForSeconds(0.4f);
         SceneManager.LoadScene("MainGameScene");
     }
@@ -71,15 +63,15 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         doorOpen.SetActive(false);
         door3.SetActive(true);
-        blipSound.Play();
+        FMODUnity.RuntimeManager.PlayOneShot(blipReference);
         yield return new WaitForSeconds(1f);
         door3.SetActive(false);
         door2.SetActive(true);
-        blipSound.Play();
+        FMODUnity.RuntimeManager.PlayOneShot(blipReference);
         yield return new WaitForSeconds(1f);
         door2.SetActive(false);
         doorClosed.SetActive(true);
-        blipSound.Play();
+        FMODUnity.RuntimeManager.PlayOneShot(blipReference);
         yield return new WaitForSeconds(.5f);
         Application.Quit();
 

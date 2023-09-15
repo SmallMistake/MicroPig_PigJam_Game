@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private RectTransform shutterScreen;
 
+    [SerializeField] 
+    private Animator controlHintAnimator; //Found on the shutter
+
     [SerializeField]
     private GameObject
         microgameLayer,
@@ -30,6 +33,8 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI levels;
 
+    private GameManager gameManager;
+
     public void OnGameInitialize(GameManager manager)
     {
         manager.GameStateChangeEvent -= this.OnGameStateChangeEvent;
@@ -39,6 +44,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         this.endGameLayer.SetActive(false);
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnGameStateChangeEvent(object sender, EventArgs args)
@@ -47,7 +53,11 @@ public class UIManager : MonoBehaviour
         switch (GameManager.State)
         {
             case GameState.TransitionToGame:
+                controlHintAnimator.SetTrigger(gameManager.GetCurrentMicrogame().controlHint.ToString());
+                PlayInShutter();
+                break;
             case GameState.TransitionToStore:
+                controlHintAnimator.SetTrigger(ControlHint.hidden.ToString());
                 PlayInShutter();
                 break;
             case GameState.Storefront:

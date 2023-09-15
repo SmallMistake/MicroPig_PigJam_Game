@@ -277,7 +277,7 @@ RectTransform:
   m_Children:
   - {fileID: 254663318}
   m_Father: {fileID: 1237107994699556932}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -547,7 +547,7 @@ Transform:
   - {fileID: 158382493}
   - {fileID: 2223742728923919789}
   m_Father: {fileID: 1237107994699556932}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376761425
 GameObject:
@@ -727,6 +727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237107994199481344}
   - component: {fileID: 1237107994199481351}
+  - component: {fileID: 2338776563966754744}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -750,7 +751,7 @@ Transform:
   - {fileID: 1237107994971381652}
   - {fileID: 1237107995608373318}
   m_Father: {fileID: 1237107994699556932}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1237107994199481351
 MonoBehaviour:
@@ -766,6 +767,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 1237107994528411924}
   bulletPrefab: {fileID: 1237107995608373319}
+  gunshotAudioEmitter: {fileID: 2338776563966754744}
+--- !u!114 &2338776563966754744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237107994199481345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -57947556
+      Data2: 1101882650
+      Data3: 994969473
+      Data4: 796811166
+    Path: event:/SFX/Gunshot
+  Event: 
+  PlayEvent: 0
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1237107994232874865
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +834,7 @@ Transform:
   - {fileID: 1237107994728309818}
   - {fileID: 1237107994240814052}
   m_Father: {fileID: 1237107994699556932}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1237107994232874864
 SpriteRenderer:
@@ -869,7 +902,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onGoalStatusChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6455971704708674085}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   goalComplete: 0
   HitPoints: 1
   MoveRangeX: {x: 0.1, y: 0.9}
@@ -1070,6 +1115,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7708388860721720702}
   - {fileID: 1237107996078327734}
   - {fileID: 1237107994232874871}
   - {fileID: 1237107994199481344}
@@ -1460,7 +1506,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1237107994699556932}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1237107996078327733
 MonoBehaviour:
@@ -1516,6 +1562,69 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &6718427922926441805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7708388860721720702}
+  - component: {fileID: 6455971704708674085}
+  m_Layer: 0
+  m_Name: PigSqueal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7708388860721720702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718427922926441805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1237107994699556932}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6455971704708674085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718427922926441805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -931910024
+      Data2: 1105956285
+      Data3: -224652148
+      Data4: -184936645
+    Path: event:/SFX/PigSqueal
+  Event: 
+  PlayEvent: 0
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8479685324575708741
 GameObject:
   m_ObjectHideFlags: 0

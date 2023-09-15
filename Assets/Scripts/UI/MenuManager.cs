@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
 
     private GameObject currentMenu;
 
-    void Start()
+    void Awake()
     {
         initialPage.SetActive(true);
         foreach (var page in additionalPages)

@@ -51,6 +51,7 @@ public class Draggable : MonoBehaviour
     }
     public void StartDrag()
     {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         dragging = true;
         transform.SetParent(null);
         onDragStart?.Invoke();

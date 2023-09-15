@@ -9,8 +9,8 @@ public class MicrogameHUDManager : MonoBehaviour
     public TextMeshProUGUI burnOutText;
     public TextMeshProUGUI wellDoneText;
 
-    public AudioClip victoryAudioClip;
-    public AudioClip lossAudioClip;
+    public FMODUnity.StudioEventEmitter successEmitter;
+    public FMODUnity.StudioEventEmitter failureEmitter;
 
     private AudioSource audioSource;
 
@@ -61,12 +61,12 @@ public class MicrogameHUDManager : MonoBehaviour
     private void BurnOut()
     {
         burnOutText.gameObject.SetActive(true);
-        audioSource.PlayOneShot(lossAudioClip);
+        failureEmitter.Play();
     }
 
     private void WellDone()
     {
         wellDoneText.gameObject.SetActive(true);
-        audioSource.PlayOneShot(victoryAudioClip);
+        successEmitter.Play();
     }
 }

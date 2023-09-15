@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{726d2b70-6701-4bd4-980d-1272aad360ff}">
+		<property name="assetPath">
+			<value>squish_3.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.39183673469387753</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2fc69d29-1028-4da9-86d3-249a42bf1505}</destination>
+		</relationship>
+	</object>
+</objects>

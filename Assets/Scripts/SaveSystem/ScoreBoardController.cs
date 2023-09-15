@@ -11,6 +11,10 @@ public class ScoreBoardController : MonoBehaviour
 
     private void OnEnable()
     {
+        if(manager == null)
+        {
+            manager = FindObjectOfType<SaveSystemManager>();
+        }
         FillScoresArea();
     }
 

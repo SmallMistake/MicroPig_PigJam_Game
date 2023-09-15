@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{4c81efe3-90f6-42a0-a469-5da821eebffd}">
+		<property name="assetPath">
+			<value>Mechanical-Keyboard-single-button-presses-2-www.FesliyanStudios.com.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.88800000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2fc69d29-1028-4da9-86d3-249a42bf1505}</destination>
+		</relationship>
+	</object>
+</objects>
