@@ -69,7 +69,8 @@ public class GameManager : MonoBehaviour
     private TimeControl time = new TimeControl();
     public static float DeltaTime => Exists ? instance.time.DeltaTime : Time.deltaTime;
     public static float FixedDeltaTime => Exists ? instance.time.FixedDeltatime : Time.fixedDeltaTime;
-    public static float DifficultyTimeScale => Exists? instance.time.DifficultyScale : 1f;
+
+    public static float DifficultyTimeScale => Exists? (timesSpeedUp * speedUpAmount) : 0f;
     public static float TimeScale
     {
         get => Exists ? instance.time.Scale : Time.timeScale;
@@ -82,7 +83,22 @@ public class GameManager : MonoBehaviour
     public float StorefrontDuration = 3f;
     public float TransitionDuration = 2f;
 
-   
+    #region Speed Up Variables
+
+    [SerializeField]
+    static float speedUpAmount;
+
+    [SerializeField]
+    int gamesBetweenSpeedUp;
+
+    int currentSpeedUpGameIndex = 0;
+    static int timesSpeedUp = 0;
+
+    internal bool needToDisplayNotice = false;
+
+    #endregion
+
+
     private int _completedGames = 0;
     public static int CompletedGames => instance._completedGames;
 
@@ -216,6 +232,7 @@ public class GameManager : MonoBehaviour
         if (success)
         {
             this._completedGames++;
+            HandleSpeedUpFunctionality();
             OnLevelSuccess?.Invoke(this._completedGames);
             this.time.SetCounter(this._completedGames);
             if (this.RemoveCompletedGames)
@@ -244,13 +261,27 @@ public class GameManager : MonoBehaviour
         {
             this.GoToState(GameState.TransitionToStore);
         }
-
     }
 
     internal void IncreaseLosses(int amountToChange)
     {
         this._losses += amountToChange;
         OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
+    }
+
+    public bool HandleSpeedUpFunctionality()
+    {
+        currentSpeedUpGameIndex++;
+
+        if (currentSpeedUpGameIndex >= gamesBetweenSpeedUp)
+        {
+            currentSpeedUpGameIndex = 0;
+            timesSpeedUp++;
+            needToDisplayNotice = true;
+
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -325,7 +356,6 @@ public class GameManager : MonoBehaviour
         this._customer = this.customers.ChooseRandom();
         this._currentMicrogame = this._customer.microGames.ChooseRandom();
         Destroy(this.activeMicrogameInstance);
-
     }
 
     

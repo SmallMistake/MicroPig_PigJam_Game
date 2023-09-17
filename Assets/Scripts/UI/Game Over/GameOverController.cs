@@ -18,10 +18,10 @@ public class GameOverController : MonoBehaviour
     List<Rankings> rankings = new List<Rankings>();
 
     [SerializeField]
-    UIAreaManager rankingAreaManager;
+    TextMeshProUGUI levelTextMesh;
 
     [SerializeField]
-    TextMeshProUGUI levelTextMesh;
+    Animator gameOverPanelManager;
 
     private void OnEnable()
     {
@@ -33,7 +33,6 @@ public class GameOverController : MonoBehaviour
         int levelsCompleted = GetLevelsCompleted();
         levelTextMesh.text = levelsCompleted.ToString();
         string ranking = GetRanking(levelsCompleted);
-        rankingAreaManager.ChangeCurrentArea(ranking);
     }
 
     private int GetLevelsCompleted()

@@ -6,11 +6,32 @@ public class SpawnObjectInArea : MonoBehaviour
 {
     public GameObject gameObjectToSpawn;
     public Collider2D spawnArea;
-    
+
+    [SerializeField]
+    GameObject spawnParent;
+
+    [SerializeField]
+    bool spawnOnEnable;
+    [SerializeField]
+    int amountToSpawnOnEnable;
+
+    private void OnEnable()
+    {
+        if(spawnOnEnable)
+        {
+            SpawnObject(amountToSpawnOnEnable);
+        }
+    }
+
+
     public void SpawnObject(int numberToSpawn)
     {
         for(int i = 0; i < numberToSpawn; i++) {
             GameObject gameObject = Instantiate(gameObjectToSpawn);
+            if(spawnParent != null)
+            {
+                gameObject.transform.SetParent(spawnParent.transform);
+            }
             gameObject.transform.position = PickARandomPointArea(spawnArea.bounds);
         }
 

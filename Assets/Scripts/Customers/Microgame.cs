@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ControlHint { leftClick, alternatingClick, drag, hidden }
+public enum ControlHint { leftClick, alternatingClick, drag, hidden, movement }
 
 [Serializable]
 public class Microgame

@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
     public void ChangePage(GameObject nextPage)
     {
 
-        currentMenu.SetActive(false);
+        //currentMenu.SetActive(false);
         currentMenu = nextPage;
         currentMenu.SetActive(true);
     }

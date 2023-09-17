@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e9a510d9-3e06-4658-aaa7-926a7654947f}">
+		<property name="assetPath">
+			<value>Knife Sharpening - Knife 1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.4306802721088436</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2fc69d29-1028-4da9-86d3-249a42bf1505}</destination>
+		</relationship>
+	</object>
+</objects>

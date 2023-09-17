@@ -25,3 +25,9 @@ MonoBehaviour:
   - MicrogameName: Fix It
     microgamePrefab: {fileID: 7685435154778085295, guid: 7714adc33047a69409ba09116f9eecd1, type: 3}
     controlHint: 1
+  - MicrogameName: Stir It
+    microgamePrefab: {fileID: 5611173020818015934, guid: c8615f1a11abebe4ebe230513f9a4e79, type: 3}
+    controlHint: 4
+  - MicrogameName: Sharpen It
+    microgamePrefab: {fileID: 5862038100650846513, guid: 3fe6a086c5e097a46a00c8436f03675b, type: 3}
+    controlHint: 4
