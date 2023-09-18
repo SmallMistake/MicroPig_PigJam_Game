@@ -17,6 +17,9 @@ public class Draggable : MonoBehaviour
 
     public UnityEvent onDragStart;
 
+    [SerializeField]
+    private bool unsetParentOnDrag;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,7 +56,10 @@ public class Draggable : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         dragging = true;
-        transform.SetParent(null);
+        if (unsetParentOnDrag)
+        {
+            transform.SetParent(null);
+        }
         onDragStart?.Invoke();
     }
 

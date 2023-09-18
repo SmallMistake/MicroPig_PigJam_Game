@@ -78,4 +78,9 @@ public class MicrogameManager : MonoBehaviour
         gameOver = true;
         onMicrogameFinished?.Invoke(won);
     }
+
+    public bool GetGameOverStatus()
+    {
+        return gameOver;
+    }
 }

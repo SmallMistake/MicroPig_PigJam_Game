@@ -5,9 +5,19 @@ using UnityEngine;
 public class DestroyAfterTime : MonoBehaviour
 {
     public float destroyAferTime = 5;
+
+    private Coroutine countdownRoutine;
+
     private void OnEnable()
     {
-        StartCoroutine(HandleCountdown());
+        countdownRoutine = StartCoroutine(HandleCountdown());
+    }
+
+    public void RestartCountdown(float newDestroyTime)
+    {
+        destroyAferTime = newDestroyTime;
+        StopCoroutine(countdownRoutine);
+        countdownRoutine = StartCoroutine(HandleCountdown());
     }
 
     IEnumerator HandleCountdown()
@@ -15,4 +25,6 @@ public class DestroyAfterTime : MonoBehaviour
         yield return new WaitForSeconds(destroyAferTime);
         Destroy(gameObject);
     }
+
+
 }
