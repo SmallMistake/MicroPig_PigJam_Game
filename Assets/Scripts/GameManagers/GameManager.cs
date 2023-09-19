@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
-
+using UnityEditor.Rendering;
 
 public enum GameState
 {
@@ -69,7 +69,8 @@ public class GameManager : MonoBehaviour
     private TimeControl time = new TimeControl();
     public static float DeltaTime => Exists ? instance.time.DeltaTime : Time.deltaTime;
     public static float FixedDeltaTime => Exists ? instance.time.FixedDeltatime : Time.fixedDeltaTime;
-    public static float DifficultyTimeScale => Exists? instance.time.DifficultyScale : 1f;
+
+    public static float DifficultyTimeScale => Exists? (timesSpeedUp * speedUpAmount) : 0f;
     public static float TimeScale
     {
         get => Exists ? instance.time.Scale : Time.timeScale;
@@ -82,7 +83,22 @@ public class GameManager : MonoBehaviour
     public float StorefrontDuration = 3f;
     public float TransitionDuration = 2f;
 
-   
+    #region Speed Up Variables
+
+    [SerializeField]
+    static float speedUpAmount;
+
+    [SerializeField]
+    int gamesBetweenSpeedUp;
+
+    int currentSpeedUpGameIndex = 0;
+    static int timesSpeedUp = 0;
+
+    internal bool needToDisplayNotice = false;
+
+    #endregion
+
+
     private int _completedGames = 0;
     public static int CompletedGames => instance._completedGames;
 
@@ -98,7 +114,7 @@ public class GameManager : MonoBehaviour
     private Customer _customer;
     public static Customer Customer => instance._customer;
 
-    private Microgame currentMicrogame;
+    private Microgame _currentMicrogame;
     private GameObject activeMicrogameInstance;
     private Dictionary<GameState, GameState> transitions = new Dictionary<GameState, GameState>()
     {
@@ -216,11 +232,12 @@ public class GameManager : MonoBehaviour
         if (success)
         {
             this._completedGames++;
+            HandleSpeedUpFunctionality();
             OnLevelSuccess?.Invoke(this._completedGames);
             this.time.SetCounter(this._completedGames);
             if (this.RemoveCompletedGames)
             {
-                this._customer.microGames.Remove(this.currentMicrogame);
+                this._customer.microGames.Remove(_currentMicrogame);
                 if (this._customer.microGames.Count == 0)
                 {
                     this.customers.Remove(this._customer);
@@ -233,8 +250,7 @@ public class GameManager : MonoBehaviour
         }
         else 
         {
-            this._losses++;
-            OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
+            IncreaseLosses(1);
             if (this._losses >= this._lossCountForGameOver)
             {
                 this.GoToState(GameState.EndGame);
@@ -245,7 +261,27 @@ public class GameManager : MonoBehaviour
         {
             this.GoToState(GameState.TransitionToStore);
         }
+    }
 
+    internal void IncreaseLosses(int amountToChange)
+    {
+        this._losses += amountToChange;
+        OnHealthChanged?.Invoke(_lossCountForGameOver - _losses);
+    }
+
+    public bool HandleSpeedUpFunctionality()
+    {
+        currentSpeedUpGameIndex++;
+
+        if (currentSpeedUpGameIndex >= gamesBetweenSpeedUp)
+        {
+            currentSpeedUpGameIndex = 0;
+            timesSpeedUp++;
+            needToDisplayNotice = true;
+
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -318,9 +354,8 @@ public class GameManager : MonoBehaviour
     private void BeginStorefrontState() 
     {
         this._customer = this.customers.ChooseRandom();
-        this.currentMicrogame = this._customer.microGames.ChooseRandom();
+        this._currentMicrogame = this._customer.microGames.ChooseRandom();
         Destroy(this.activeMicrogameInstance);
-
     }
 
     
@@ -331,11 +366,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void BeginMicrogameState() 
     {
-        this.activeMicrogameInstance = Instantiate(this.currentMicrogame.microgamePrefab);
+        this.activeMicrogameInstance = Instantiate(this._currentMicrogame.microgamePrefab);
         MicrogameManager microgameManager = this.activeMicrogameInstance.GetComponentInChildren<MicrogameManager>();
         if(microgameManager != null )
         {
-            microgameManager.SetMicroGameName(this.currentMicrogame.MicrogameName);
+            microgameManager.SetMicroGameName(_currentMicrogame.MicrogameName);
         }
     }
 
@@ -389,6 +424,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    public Microgame GetCurrentMicrogame()
+    {
+        return this._currentMicrogame;
+    }
   
 
 }

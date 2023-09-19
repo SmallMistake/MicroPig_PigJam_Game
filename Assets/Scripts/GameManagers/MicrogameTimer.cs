@@ -17,6 +17,8 @@ public class MicrogameTimer : MonoBehaviour
 
     private void OnEnable()
     {
+        print(GameManager.DifficultyTimeScale);
+        timeOutInSeconds = timeOutInSeconds - GameManager.DifficultyTimeScale;
         currentTime = 0;
         MicrogameManager.onMicrogameFinished += HandleFinish;
     }

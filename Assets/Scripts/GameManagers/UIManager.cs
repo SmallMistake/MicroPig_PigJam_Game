@@ -13,22 +13,26 @@ public class UIManager : MonoBehaviour
     public event EventHandler StartGameEvent;
 
     [SerializeField]
-    private CustomerUI customerUI;
+    private CustomerHolderController customerHolderController;
 
     [SerializeField]
     private RectTransform shutterScreen;
 
+    [SerializeField] 
+    private Animator controlHintAnimator; //Found on the shutter
+
     [SerializeField]
-    private GameObject
+    private List<GameObject>
         microgameLayer,
         storefrontLayer,
-        mainMenuLayer,
         endGameLayer;
 
     [SerializeField]
     private Image endGameBackdrop;
 
     public TextMeshProUGUI levels;
+
+    private GameManager gameManager;
 
     public void OnGameInitialize(GameManager manager)
     {
@@ -38,7 +42,11 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        this.endGameLayer.SetActive(false);
+        foreach (GameObject layerPart in endGameLayer)
+        {
+            layerPart.SetActive(false);
+        }
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnGameStateChangeEvent(object sender, EventArgs args)
@@ -47,35 +55,55 @@ public class UIManager : MonoBehaviour
         switch (GameManager.State)
         {
             case GameState.TransitionToGame:
+                controlHintAnimator.SetTrigger(gameManager.GetCurrentMicrogame().controlHint.ToString());
+                PlayInShutter();
+                break;
             case GameState.TransitionToStore:
+                controlHintAnimator.SetTrigger(ControlHint.hidden.ToString());
                 PlayInShutter();
                 break;
             case GameState.Storefront:
                 PlayOutShutter();
-                this.customerUI.SetCustomer(GameManager.Customer);
-                this.storefrontLayer.SetActive(true);
-                this.microgameLayer.SetActive(false);
-                this.mainMenuLayer.SetActive(false);
-                this.endGameLayer.SetActive(false);
+                foreach (GameObject layerPart in storefrontLayer)
+                {
+                    layerPart.SetActive(true);
+                }
+                foreach (GameObject layerPart in microgameLayer)
+                {
+                    layerPart.SetActive(false);
+                }
+                foreach (GameObject layerPart in endGameLayer)
+                {
+                    layerPart.SetActive(false);
+                }
+                this.customerHolderController.SetCustomer(GameManager.Customer);
                 break;
             case GameState.Microgame:
                 PlayOutShutter();
-                this.storefrontLayer.SetActive(false);
-                this.microgameLayer.SetActive(true);
-                
-                break;
-            case GameState.MainMenu:
-                this.storefrontLayer.SetActive(false);
-                this.microgameLayer.SetActive(false);
-                this.mainMenuLayer.SetActive(true);
-                this.endGameLayer.SetActive(false);
+                foreach (GameObject layerPart in storefrontLayer)
+                {
+                    layerPart.SetActive(false);
+                }
+                foreach (GameObject layerPart in microgameLayer)
+                {
+                    layerPart.SetActive(true);
+                }
+
                 break;
             case GameState.EndGame:
+                foreach (GameObject layerPart in endGameLayer)
+                {
+                    layerPart.SetActive(true);
+                }
+                foreach (GameObject layerPart in storefrontLayer)
+                {
+                    layerPart.SetActive(false);
+                }
+                foreach (GameObject layerPart in microgameLayer)
+                {
+                    layerPart.SetActive(false);
+                }
                 levels.text = GameManager.CompletedGames.ToString();
-                this.endGameLayer.SetActive(true);
-                this.storefrontLayer.SetActive(false);
-                this.microgameLayer.SetActive(false);
-                this.mainMenuLayer.SetActive(false);
                 break;
 
            

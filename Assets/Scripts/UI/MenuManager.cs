@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
 
     private GameObject currentMenu;
 
-    void Start()
+    void Awake()
     {
         initialPage.SetActive(true);
         foreach (var page in additionalPages)
@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
     public void ChangePage(GameObject nextPage)
     {
 
-        currentMenu.SetActive(false);
+        //currentMenu.SetActive(false);
         currentMenu = nextPage;
         currentMenu.SetActive(true);
     }

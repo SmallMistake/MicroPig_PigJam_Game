@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class TimeOutUIController : MonoBehaviour
 {
-    public Slider progressBar;
+    [SerializeField]
+    Slider progressBar;
+
+    [SerializeField]
+    GameObject closeToTimeOutObject;
 
     private void OnEnable()
     {
@@ -20,5 +24,10 @@ public class TimeOutUIController : MonoBehaviour
     private void UpdateVisuals(float currentPercent)
     {
         progressBar.value = 1 - currentPercent;
+
+        if (progressBar.value <= 0)
+        {
+            closeToTimeOutObject.SetActive(true);
+        }
     }
 }

@@ -7,43 +7,35 @@ using DG.Tweening;
 public class CustomerUI : MonoBehaviour
 {
     [SerializeField]
-    private Image image;
+    private SpriteRenderer spriteRenderer;
 
     [SerializeField]
-    private TextMeshProUGUI nameLabel, typeLabel;
+    private Animator customerAnimator;
 
     [SerializeField]
-    private CanvasGroup canvasGroup;
+    private ParticleSystem happyParticleSystem;
 
-    private void OnDisable()
-    {
-        this.transform.DOKill();
-    }
+    [SerializeField]
+    private ParticleSystem angryParticleSystem;
 
     public void SetCustomer(Customer customer)
     {
         if (customer != null)
         {
-            this.canvasGroup.alpha = 0f;
-            this.canvasGroup.DOFade(1f, 0.3f);
-            this.image.sprite = customer.sprites[Random.Range(0, customer.sprites.Count)];
-            this.nameLabel.text = customer.customerName;
-            this.typeLabel.text = customer.gameType;
-            this.transform.DOKill();
-            this.transform.localScale = Vector3.one * 0.75f;
-            this.transform.DOScale(1f,2f);
+            spriteRenderer.sprite = customer.sprites[Random.Range(0, customer.sprites.Count)];
+            customerAnimator.SetTrigger("IntroduceCustomer");
+            //customerAnimator.SetTrigger("FinishCustomer");
 
         }
         else
         {
-            this.canvasGroup.DOKill();
-            this.canvasGroup.alpha = 0f;
-            this.transform.DOKill();
-            this.nameLabel.text = "";
-            this.typeLabel.text = "";
+            happyParticleSystem.Play();
         }
     }
 
-   
 
+    public void ExitStore()
+    {
+        customerAnimator.SetTrigger("FinishCustomer");
+    }
 }
