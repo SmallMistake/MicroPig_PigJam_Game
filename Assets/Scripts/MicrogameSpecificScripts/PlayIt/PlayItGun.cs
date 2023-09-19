@@ -37,7 +37,7 @@ public class PlayItGun : MonoBehaviour
                 onOutOfAmmo?.Invoke();
             }
         }
-        this.cooldownRemaining -= GameManager.DeltaTime;
+        this.cooldownRemaining -= GameManager.DifficultyDeltaTime;
 
     }
 

@@ -67,10 +67,10 @@ public class GameManager : MonoBehaviour
 
     private float totalTime = 0f;
     private TimeControl time = new TimeControl();
-    public static float DeltaTime => Exists ? instance.time.DeltaTime : Time.deltaTime;
-    public static float FixedDeltaTime => Exists ? instance.time.FixedDeltatime : Time.fixedDeltaTime;
+    public static float DifficultyDeltaTime => Exists ? instance.time.DeltaTime : Time.deltaTime;
+    public static float DifficultyFixedDeltaTime => Exists ? instance.time.FixedDeltatime : Time.fixedDeltaTime;
 
-    public static float DifficultyTimeScale => Exists? (timesSpeedUp * speedUpAmount) : 0f;
+    public static float DifficultyTimeScale => Exists ? instance.time.DifficultyScale : 1f; //(timesSpeedUp * speedUpAmount) : 0f;
     public static float TimeScale
     {
         get => Exists ? instance.time.Scale : Time.timeScale;
@@ -85,14 +85,13 @@ public class GameManager : MonoBehaviour
 
     #region Speed Up Variables
 
-    [SerializeField]
-    static float speedUpAmount;
+    [SerializeField, Tooltip("a multiplier to time scale as games are completed")]
+    private float difficultyScaling;
 
     [SerializeField]
-    int gamesBetweenSpeedUp;
+    private int gamesBetweenSpeedUp;
 
     int currentSpeedUpGameIndex = 0;
-    static int timesSpeedUp = 0;
 
     internal bool needToDisplayNotice = false;
 
@@ -234,7 +233,7 @@ public class GameManager : MonoBehaviour
             this._completedGames++;
             HandleSpeedUpFunctionality();
             OnLevelSuccess?.Invoke(this._completedGames);
-            this.time.SetCounter(this._completedGames);
+            //this.time.SetCounter(this._completedGames);
             if (this.RemoveCompletedGames)
             {
                 this._customer.microGames.Remove(_currentMicrogame);
@@ -276,7 +275,7 @@ public class GameManager : MonoBehaviour
         if (currentSpeedUpGameIndex >= gamesBetweenSpeedUp)
         {
             currentSpeedUpGameIndex = 0;
-            timesSpeedUp++;
+            this.time.AdjustDifficultyScale(this.difficultyScaling);
             needToDisplayNotice = true;
 
             return true;
@@ -404,7 +403,7 @@ public class GameManager : MonoBehaviour
             this._losses = 0;
             this._completedGames = 0;
             this.totalTime = 0f;
-            this.time.SetCounter(0);
+            //this.time.SetCounter(0);
             this.GoToState(GameState.Storefront);
         }
     }

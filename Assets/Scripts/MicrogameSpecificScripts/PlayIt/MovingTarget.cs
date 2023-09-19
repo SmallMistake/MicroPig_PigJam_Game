@@ -42,7 +42,7 @@ public class MovingTarget : MicrogameGoalTracker
     {
         if (this.isAlive)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, this.goal, this.MoveSpeed * GameManager.DeltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, this.goal, this.MoveSpeed * GameManager.DifficultyDeltaTime);
             if (Vector3.Distance(this.transform.position, goal) < this.DistanceThreshold)
             {
                 this.GetNewGoal();

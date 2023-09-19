@@ -10,8 +10,8 @@ public class PlayItBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.transform.Translate(Vector3.forward * this.Speed * GameManager.FixedDeltaTime, Space.Self);
-        this.Lifespan -= GameManager.FixedDeltaTime;
+        this.transform.Translate(Vector3.forward * this.Speed * GameManager.DifficultyFixedDeltaTime, Space.Self);
+        this.Lifespan -= GameManager.DifficultyFixedDeltaTime;
         if (this.Lifespan <= 0f) Destroy(this.gameObject);
     }
 

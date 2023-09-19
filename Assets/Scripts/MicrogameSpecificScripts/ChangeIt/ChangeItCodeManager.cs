@@ -72,7 +72,7 @@ public class ChangeItCodeManager : MicrogameGoalTracker
         float time = 0.1f;
         while (time > 0f)
         {
-            time -= Time.deltaTime;
+            time -= GameManager.DifficultyDeltaTime;
             yield return null;
         }
         

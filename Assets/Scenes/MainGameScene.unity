@@ -1857,6 +1857,7 @@ MonoBehaviour:
   RemoveCompletedGames: 0
   StorefrontDuration: 2
   TransitionDuration: 2
+  difficultyScaling: 1.1
   gamesBetweenSpeedUp: 3
 --- !u!1 &548976805
 GameObject:

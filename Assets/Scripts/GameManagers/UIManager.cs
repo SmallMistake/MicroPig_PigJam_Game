@@ -118,15 +118,14 @@ public class UIManager : MonoBehaviour
 
     private void PlayInShutter()
     {
-        Debug.Log("play in shutter");
         this.shutterScreen.DOKill();
-        this.shutterScreen.DOLocalMoveY(0f, 1.5f);
+        this.shutterScreen.DOLocalMoveY(0f, 1.5f / GameManager.DifficultyTimeScale);
     }
 
     private void PlayOutShutter()
     {
         this.shutterScreen.DOKill();
-        this.shutterScreen.DOLocalMoveY(1080f, 1.5f);
+        this.shutterScreen.DOLocalMoveY(1080f, 1.5f / GameManager.DifficultyTimeScale);
     }
 
 }
