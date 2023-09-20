@@ -1,3 +1,4 @@
+using Febucci.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,10 +19,16 @@ public class GameOverController : MonoBehaviour
     List<Rankings> rankings = new List<Rankings>();
 
     [SerializeField]
+    TypewriterByCharacter gameOverTypeWriter;
+
+    [SerializeField]
     TextMeshProUGUI levelTextMesh;
 
     [SerializeField]
-    Animator gameOverPanelManager;
+    Animator gameOverAnimator;
+
+    [SerializeField]
+    GameObject levelMusicObject; //Disabled to stop music;
 
     private void OnEnable()
     {
@@ -33,11 +40,30 @@ public class GameOverController : MonoBehaviour
         int levelsCompleted = GetLevelsCompleted();
         levelTextMesh.text = levelsCompleted.ToString();
         string ranking = GetRanking(levelsCompleted);
+        gameOverAnimator.SetTrigger("ShowGameOverPanel");
+        levelMusicObject.SetActive(false);
+    }
+
+    public void WriteGameOverText()
+    {
+        gameOverTypeWriter.StartShowingText(restart: true);
+    }
+
+    public void SetAnimatorTrigger(string triggerName)
+    {
+        gameOverAnimator.SetTrigger(triggerName);
     }
 
     private int GetLevelsCompleted()
     {
-        return GameManager.CompletedGames;
+        if (GameManager.Exists)
+        {
+            return GameManager.CompletedGames;
+        }
+        else // Used for debuging when a game manager might not exist.
+        {
+            return 0;
+        }
     }
 
     private string GetRanking(int levelsCompleted)

@@ -14,6 +14,8 @@ public enum GameState
     TransitionToGame,
     TransitionToStore,
     Microgame,
+
+    TransitionToEnd,
     EndGame
 }
 
@@ -122,7 +124,8 @@ public class GameManager : MonoBehaviour
         {GameState.Storefront, GameState.TransitionToGame},
         {GameState.TransitionToGame, GameState.Microgame },
         {GameState.Microgame, GameState.TransitionToStore },
-        {GameState.TransitionToStore, GameState.Storefront }
+        {GameState.TransitionToStore, GameState.Storefront },
+        {GameState.TransitionToEnd, GameState.EndGame },
     };
 
     // we could create state objects but let's create state actions.
@@ -157,6 +160,7 @@ public class GameManager : MonoBehaviour
             this.beginStateActions[GameState.TransitionToGame] = this.BeginTransitionState;
             this.beginStateActions[GameState.TransitionToStore] = this.BeginTransitionState;
             this.beginStateActions[GameState.Storefront] = this.BeginStorefrontState;
+            this.beginStateActions[GameState.TransitionToEnd] = this.BeginTransitionState;
             this.beginStateActions[GameState.EndGame] = this.BeginEndGameState;
 
             this.updateActions[GameState.None] = this.DoNothing;
@@ -165,6 +169,7 @@ public class GameManager : MonoBehaviour
             this.updateActions[GameState.TransitionToGame] = this.UpdateTransitionState;
             this.updateActions[GameState.TransitionToStore] = this.UpdateTransitionState;
             this.updateActions[GameState.Storefront] = this.UpdateStorefrontState;
+            this.updateActions[GameState.TransitionToEnd] = this.UpdateTransitionState;
             this.updateActions[GameState.EndGame] = this.UpdateEndGameState;
 
             this.endStateActions[GameState.None] = (state) => this.DoNothing();
@@ -173,6 +178,7 @@ public class GameManager : MonoBehaviour
             this.endStateActions[GameState.TransitionToGame] = this.EndTransitionState;
             this.endStateActions[GameState.TransitionToStore] = this.EndTransitionState;
             this.endStateActions[GameState.Storefront] = this.EndStorefrontState;
+            this.endStateActions[GameState.TransitionToEnd] = this.EndTransitionState;
             this.endStateActions[GameState.EndGame] = this.EndEndGameState;
 
             this.uiManager.OnGameInitialize(this);
@@ -243,7 +249,7 @@ public class GameManager : MonoBehaviour
                     this.customers.Remove(this._customer);
                     if (this.customers.Count == 0)
                     {
-                        this.GoToState(GameState.EndGame);
+                        this.GoToState(GameState.TransitionToEnd);
                     }
                 }
             }
@@ -253,11 +259,11 @@ public class GameManager : MonoBehaviour
             IncreaseLosses(1);
             if (this._losses >= this._lossCountForGameOver)
             {
-                this.GoToState(GameState.EndGame);
+                this.GoToState(GameState.TransitionToEnd);
             }
         }
 
-        if (this._state != GameState.EndGame)
+        if (this._state != GameState.TransitionToEnd)
         {
             this.GoToState(GameState.TransitionToStore);
         }
@@ -374,7 +380,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void BeginEndGameState() { }
+    private void BeginEndGameState() {
+        Destroy(this.activeMicrogameInstance);
+    }
     
 
     private void UpdateMenuState() { }

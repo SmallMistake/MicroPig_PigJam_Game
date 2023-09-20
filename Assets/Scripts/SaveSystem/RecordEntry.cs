@@ -11,4 +11,10 @@ public class RecordEntry
     {
         playerName = "------";
     }
+
+    public RecordEntry(string playerName, int levelCount)
+    {
+        this.playerName = playerName;
+        this.level = levelCount;
+    }
 }

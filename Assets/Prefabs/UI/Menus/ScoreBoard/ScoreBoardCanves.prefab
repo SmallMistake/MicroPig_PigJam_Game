@@ -465,7 +465,6 @@ GameObject:
   - component: {fileID: 170796450138786654}
   - component: {fileID: 170796450138786655}
   - component: {fileID: 170796450138786652}
-  - component: {fileID: 170796450138786653}
   m_Layer: 5
   m_Name: ScoreBoardCanves
   m_TagString: Untagged
@@ -537,7 +536,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &170796450138786655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,20 +570,8 @@ MonoBehaviour:
   manager: {fileID: 0}
   numberOfRows: 10
   recordRowPrefab: {fileID: 1941201827301321813, guid: df38409262323c3479eda582a8002b14, type: 3}
---- !u!114 &170796450138786653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170796450138786650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48882ae5050e51842b93b75982b1443b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstSelectedButton:
-  - {fileID: 170796449177278682}
+  endCanvasUIAnimator: {fileID: 0}
+  timeToWaitTillNewRecordCheck: 0
 --- !u!1 &170796450334142025
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +812,9 @@ MonoBehaviour:
   - size
   defaultDisappearancesTags:
   - fade
-  defaultBehaviorsTags: []
+  defaultBehaviorsTags:
+  - wave a=0.4
+  - rainb
   defaultTagsMode: 0
 --- !u!1001 &170796448502851741
 PrefabInstance:

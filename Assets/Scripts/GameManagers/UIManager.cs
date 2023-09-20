@@ -59,10 +59,16 @@ public class UIManager : MonoBehaviour
                 PlayInShutter();
                 break;
             case GameState.TransitionToStore:
+                Camera.main.orthographic = false;
+                controlHintAnimator.SetTrigger(ControlHint.hidden.ToString());
+                PlayInShutter();
+                break;
+            case GameState.TransitionToEnd:
                 controlHintAnimator.SetTrigger(ControlHint.hidden.ToString());
                 PlayInShutter();
                 break;
             case GameState.Storefront:
+                Camera.main.orthographic = false;
                 PlayOutShutter();
                 foreach (GameObject layerPart in storefrontLayer)
                 {
@@ -79,6 +85,7 @@ public class UIManager : MonoBehaviour
                 this.customerHolderController.SetCustomer(GameManager.Customer);
                 break;
             case GameState.Microgame:
+                Camera.main.orthographic = true;
                 PlayOutShutter();
                 foreach (GameObject layerPart in storefrontLayer)
                 {
@@ -91,6 +98,7 @@ public class UIManager : MonoBehaviour
 
                 break;
             case GameState.EndGame:
+                PlayOutShutter();
                 foreach (GameObject layerPart in endGameLayer)
                 {
                     layerPart.SetActive(true);
