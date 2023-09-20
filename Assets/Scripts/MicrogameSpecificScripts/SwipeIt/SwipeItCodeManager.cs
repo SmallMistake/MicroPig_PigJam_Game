@@ -66,7 +66,7 @@ public class SwipeItCodeManager : MicrogameGoalTracker
                 this.failed = true;
                 this.manager.TimeOut();
             }
-            this.progress += GameManager.DeltaTime * this.ArmSpeed;
+            this.progress += GameManager.DifficultyDeltaTime * this.ArmSpeed;
             if (this.progress >= 1f && !this.failed)
             {
                 this.goalComplete = true;
@@ -79,7 +79,7 @@ public class SwipeItCodeManager : MicrogameGoalTracker
         {
             this.movableArm.transform.position = Vector3.Lerp(this.startPoint.position, this.endPoint.position, this.progress);
 
-            this.stateTimer -= GameManager.DeltaTime;
+            this.stateTimer -= GameManager.DifficultyDeltaTime;
             if (this.stateTimer <= 0f)
             {
                 this.SetState(this.stateTransition[this.state]);
@@ -88,7 +88,7 @@ public class SwipeItCodeManager : MicrogameGoalTracker
         else if (this.progress >= 1f && !this.failed)
         {
             this.movableArm.transform.position = 
-                Vector3.Lerp(this.movableArm.transform.position, this.startPoint.position, GameManager.DeltaTime * this.RetractSpeed);
+                Vector3.Lerp(this.movableArm.transform.position, this.startPoint.position, GameManager.DifficultyDeltaTime * this.RetractSpeed);
         }
     }
 

@@ -23,7 +23,7 @@ public class SaveItCodeController : MonoBehaviour
     void Start()
     {
         fallingObject.GetComponent<SpriteRenderer>().sprite = GetRandomSprite(sprites);
-        float fallTime = Random.Range(minFallTime, maxFallTime);
+        float fallTime = Random.Range(minFallTime/GameManager.DifficultyTimeScale, maxFallTime/GameManager.DifficultyTimeScale);
         StartCoroutine(CountdownToFall(fallTime));
     }
 
@@ -36,7 +36,9 @@ public class SaveItCodeController : MonoBehaviour
     IEnumerator CountdownToFall(float fallTime)
     {
         yield return new WaitForSeconds(fallTime);
-        fallingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        var rb = fallingObject.GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = GameManager.DifficultyTimeScale;
     }
 
     public void CatchObjects(List<GameObject> caughtObjects)
