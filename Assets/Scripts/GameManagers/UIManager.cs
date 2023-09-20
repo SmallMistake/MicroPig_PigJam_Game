@@ -59,7 +59,6 @@ public class UIManager : MonoBehaviour
                 PlayInShutter();
                 break;
             case GameState.TransitionToStore:
-                Camera.main.orthographic = false;
                 controlHintAnimator.SetTrigger(ControlHint.hidden.ToString());
                 PlayInShutter();
                 break;

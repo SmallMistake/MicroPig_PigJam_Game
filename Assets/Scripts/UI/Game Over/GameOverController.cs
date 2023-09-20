@@ -27,9 +27,6 @@ public class GameOverController : MonoBehaviour
     [SerializeField]
     Animator gameOverAnimator;
 
-    [SerializeField]
-    GameObject levelMusicObject; //Disabled to stop music;
-
     private void OnEnable()
     {
         HandleGameOver();
@@ -41,7 +38,6 @@ public class GameOverController : MonoBehaviour
         levelTextMesh.text = levelsCompleted.ToString();
         string ranking = GetRanking(levelsCompleted);
         gameOverAnimator.SetTrigger("ShowGameOverPanel");
-        levelMusicObject.SetActive(false);
     }
 
     public void WriteGameOverText()
