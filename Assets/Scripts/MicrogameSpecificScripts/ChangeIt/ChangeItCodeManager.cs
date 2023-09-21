@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using System.Net.NetworkInformation;
 
 public class ChangeItCodeManager : MicrogameGoalTracker
 {
@@ -27,6 +28,12 @@ public class ChangeItCodeManager : MicrogameGoalTracker
 
     private bool gameover = false;
 
+
+    [SerializeField]
+    private float timeTillSuccessShortcut; //If a player gets the correct awnser and has to wait forever it is boring. So this allows the player to skip after a set time.
+    private Coroutine successCoroutine;
+
+
     private void Awake()
     {
         channelTextMesh.text = "";
@@ -36,6 +43,14 @@ public class ChangeItCodeManager : MicrogameGoalTracker
         this.channels[startIndex].SetActive(true);
         this.CurrentChannel = this.startIndex;
         this.activeChannelObject = this.channels[startIndex];
+    }
+
+    private void OnDisable()
+    {
+        if(successCoroutine != null)
+        {
+            StopCoroutine(successCoroutine);
+        }
     }
 
     private void Update()
@@ -68,6 +83,17 @@ public class ChangeItCodeManager : MicrogameGoalTracker
 
     private IEnumerator ChannelChangeProcess()
     {
+
+        if(successCoroutine != null)
+        {
+            StopCoroutine(successCoroutine);
+            successCoroutine = null;
+        }
+        if (this.DesiredChannel == this.CurrentChannel)
+        {
+            successCoroutine = StartCoroutine(CountdownToSuccess());
+        }
+
         this.swapNoise.SetActive(true);
         float time = 0.1f;
         while (time > 0f)
@@ -113,5 +139,12 @@ public class ChangeItCodeManager : MicrogameGoalTracker
         {
             this.ThumbsUp.SetActive(false);
         }
+    }
+
+    IEnumerator CountdownToSuccess()
+    {
+        yield return new WaitForSeconds(timeTillSuccessShortcut);
+        CompleteGoal(true);
+        successCoroutine = null;
     }
 }

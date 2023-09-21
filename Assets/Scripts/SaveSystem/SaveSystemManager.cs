@@ -27,7 +27,9 @@ public class SaveSystemManager : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             List<RecordEntry> data = (List<RecordEntry>)bf.Deserialize(file);
             records = data;
+            records = records.OrderByDescending(x => x.level).ToList();
             file.Close();
+            
             return records;
         }
         else
@@ -75,7 +77,7 @@ public class SaveSystemManager : MonoBehaviour
     public void SaveNewRecord(string playerName, int levelCount)
     {
         records.Add(new RecordEntry(playerName, levelCount));
-        records.OrderBy(x => x.level).ToList();
+        records = records.OrderByDescending(x => x.level).ToList();
         records = records.Take(10).ToList();
         SaveRecords();
     }

@@ -12,9 +12,12 @@ public class CodeItCodeManager : MicrogameGoalTracker
     public string[] codeBlocks;
 
     public TextMeshProUGUI codeArea;
-    public Scrollbar scrollbar;
 
     private StringReader selectedCodeReader;
+
+    [SerializeField]
+    int maxNumberOfRowsToShow;
+    private int currentNumberOfRowsShown = 0;
     void Start()
     {
         string selectedCodeString = SelectCodeBlock();
@@ -35,11 +38,11 @@ public class CodeItCodeManager : MicrogameGoalTracker
     public void ShowNextCodeBlock()
     {
         string? firstLine = selectedCodeReader.ReadLine();
-        if (firstLine != null)
+        if (firstLine != null && currentNumberOfRowsShown < maxNumberOfRowsToShow)
         {
             codeArea.text += firstLine;
             codeArea.text += "\n";
-            if(firstLine == "")
+            if (firstLine == "")
             {
                 ShowNextCodeBlock();
             }
@@ -49,5 +52,6 @@ public class CodeItCodeManager : MicrogameGoalTracker
             goalComplete = true;
             onGoalStatusChanged?.Invoke(true);
         }
+        currentNumberOfRowsShown++;
     }
 }

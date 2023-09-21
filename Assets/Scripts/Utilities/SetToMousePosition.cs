@@ -6,6 +6,8 @@ public class SetToMousePosition : MonoBehaviour
 {
     public bool enabled = true;
     public bool hideDefaultCursor;
+
+    public bool basedOnWorldSpace = true;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -37,7 +39,15 @@ public class SetToMousePosition : MonoBehaviour
     {
         if (enabled)
         {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 worldPosition;
+            if(basedOnWorldSpace)
+            {
+                worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+            else
+            {
+                worldPosition = Input.mousePosition;
+            }
             transform.position = new Vector3(worldPosition.x, worldPosition.y, 0);
         }
     }

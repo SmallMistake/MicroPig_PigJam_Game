@@ -22,9 +22,9 @@ MonoBehaviour:
   - MicrogameName: Change It
     microgamePrefab: {fileID: 2698258472364260304, guid: d473ba3c004e4944da7e79195320a1fc, type: 3}
     controlHint: 0
-  - MicrogameName: Swipe It
+  - MicrogameName: Steal It
     microgamePrefab: {fileID: 3393621571722651080, guid: 25325899124e8bf4c879bcbf01649d60, type: 3}
-    controlHint: 2
+    controlHint: 5
   - MicrogameName: Catch It
     microgamePrefab: {fileID: 4871822640427440587, guid: cd9c5ef08fd432c44b2309e70dac0f74, type: 3}
     controlHint: 0

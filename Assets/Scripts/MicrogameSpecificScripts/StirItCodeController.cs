@@ -19,6 +19,11 @@ public class StirItCodeController : MicrogameGoalTracker
 
     private int? pastStirPointIndex;
 
+    [SerializeField]
+    private Color forwardColor;
+    [SerializeField]
+    private Color backwardColor;
+
     public void Stir(Collider2D callingStirPoint)
     {
         CalculateStir(callingStirPoint.gameObject);
@@ -60,17 +65,24 @@ public class StirItCodeController : MicrogameGoalTracker
         {
             Spin(1);
         }
-        TurnOnAndOffTriggerAreas(new List<int>() { higherStirPoint, lowerStirPoint });
-        pastStirPointIndex = stirPoints.IndexOf(callingStirPoint);
-    }
+        TurnOnAndOffTriggerAreas(higherStirPoint, lowerStirPoint);
 
-    private void TurnOnAndOffTriggerAreas(List<int> areasToKeepOn)
+        pastStirPointIndex = stirPoints.IndexOf(callingStirPoint);
+}
+
+    private void TurnOnAndOffTriggerAreas(int higherStirPoint, int lowerStirPoint)
     {
         for(int i = 0; i < stirPoints.Count; i++)
         {
-            if (areasToKeepOn.Contains(i))
+            if (higherStirPoint == i)
             {
                 stirPoints[i].SetActive(true);
+                stirPoints[i].GetComponentInChildren<SpriteRenderer>().color = forwardColor;
+            }
+            else if(lowerStirPoint == i)
+            {
+                stirPoints[i].SetActive(true);
+                stirPoints[i].GetComponentInChildren<SpriteRenderer>().color = backwardColor;
             }
             else{
                 stirPoints[i].SetActive(false);

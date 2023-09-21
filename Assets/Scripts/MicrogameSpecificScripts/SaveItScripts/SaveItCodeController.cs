@@ -11,7 +11,7 @@ public class SaveItCodeController : MonoBehaviour
     float maxFallTime;
 
     [SerializeField]
-    GameObject fallingObject;
+    SpriteRenderer fallingObjectSpriteRenderer;
 
     [SerializeField]
     List<Sprite> sprites = new List<Sprite>();
@@ -19,10 +19,15 @@ public class SaveItCodeController : MonoBehaviour
     [SerializeField] 
     NumberReachedGoal goalIncrementor;
 
+    [SerializeField]
+    Animator fallingObjectAnimator;
+
+    private List<string> possibleTriggers = new List<string>() { "downward", "left", "right"};
+
     // Start is called before the first frame update
     void Start()
     {
-        fallingObject.GetComponent<SpriteRenderer>().sprite = GetRandomSprite(sprites);
+        fallingObjectSpriteRenderer.sprite = GetRandomSprite(sprites);
         float fallTime = Random.Range(minFallTime/GameManager.DifficultyTimeScale, maxFallTime/GameManager.DifficultyTimeScale);
         StartCoroutine(CountdownToFall(fallTime));
     }
@@ -36,16 +41,15 @@ public class SaveItCodeController : MonoBehaviour
     IEnumerator CountdownToFall(float fallTime)
     {
         yield return new WaitForSeconds(fallTime);
-        var rb = fallingObject.GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = GameManager.DifficultyTimeScale;
+        fallingObjectAnimator.SetTrigger(possibleTriggers.ChooseRandom());
+        fallingObjectAnimator.speed = GameManager.DifficultyTimeScale;
     }
 
     public void CatchObjects(List<GameObject> caughtObjects)
     {
         foreach (GameObject gameObject in caughtObjects)
         {
-            gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            fallingObjectAnimator.speed = 0;
             goalIncrementor.IncreaseNumber(1);
         }
     }

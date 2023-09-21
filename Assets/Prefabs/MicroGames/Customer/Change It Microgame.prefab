@@ -895,6 +895,7 @@ MonoBehaviour:
   Manager: {fileID: 2698258471938978959}
   CurrentChannel: 0
   DesiredChannel: 0
+  timeTillSuccessShortcut: 1
 --- !u!114 &1708497046466319010
 MonoBehaviour:
   m_ObjectHideFlags: 0

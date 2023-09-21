@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour
     private GameState _state;
     public static GameState State => instance._state;
 
+    // Queue the last X number of games played so that the player does not get the same game multiple times in a row;
+    private Queue<string> previouslyPlayedMicrogameNames = new Queue<string>();
+    private int numberOfGamesBetweenReplays = 3;
+
     /// <summary>
     /// how much time has passed within the current state,
     /// used to determine when it should be over, etc.
@@ -358,9 +362,32 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void BeginStorefrontState() 
     {
-        this._customer = this.customers.ChooseRandom();
-        this._currentMicrogame = this._customer.microGames.ChooseRandom();
+        ChooseMicroGame();
         Destroy(this.activeMicrogameInstance);
+    }
+
+    //Choose game and don't allow instant repeats
+    private void ChooseMicroGame()
+    {
+        Customer customer = null;
+        Microgame microgame = null;
+        bool succeeded = false;
+        while (!succeeded)
+        {
+            customer = this.customers.ChooseRandom();
+            microgame = customer.microGames.ChooseRandom();
+            if(!previouslyPlayedMicrogameNames.Contains(microgame.MicrogameName))
+            {
+                succeeded = true;
+                previouslyPlayedMicrogameNames.Enqueue(microgame.MicrogameName);
+                if(previouslyPlayedMicrogameNames.Count >= numberOfGamesBetweenReplays)
+                {
+                    previouslyPlayedMicrogameNames.Dequeue();
+                }
+            }
+        }
+        this._customer = customer;
+        this._currentMicrogame = microgame;
     }
 
     

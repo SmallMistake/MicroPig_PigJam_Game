@@ -14431,7 +14431,6 @@ MonoBehaviour:
   gameOverTypeWriter: {fileID: 174580683}
   levelTextMesh: {fileID: 2137375813}
   gameOverAnimator: {fileID: 984305026}
-  levelMusicObject: {fileID: 0}
 --- !u!95 &984305026
 Animator:
   serializedVersion: 5
@@ -17427,8 +17426,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c405faf162b8937479b485875698ee18, type: 2}
-  m_sharedMaterial: {fileID: -1441201413330297022, guid: c405faf162b8937479b485875698ee18, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 66e4ba76d07e534489a93bc7ea3a7b72, type: 2}
+  m_sharedMaterial: {fileID: -2828917513162541160, guid: 66e4ba76d07e534489a93bc7ea3a7b72, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
